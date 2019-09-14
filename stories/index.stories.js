@@ -1,6 +1,7 @@
 import { DummyResource, DummyResourceCollection } from 'webpanel-data';
 import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
 
+import { Card } from 'antd';
 import { CommentsForm } from '../lib/CommentsForm';
 import { CommentsList } from '../lib/CommentsList';
 import React from 'react';
@@ -19,12 +20,14 @@ storiesOf('Comments', module)
       // collection.get();
       return (
         <div style={{ padding: 80 }}>
-          <CommentsList
-            items={boolean('Empty', false) ? [] : comments}
-            hasMore={false}
-            loadMore={() => {}}
-            onDelete={action('delete')}
-          />
+          <Card title="Comments">
+            <CommentsList
+              items={boolean('Empty', false) ? [] : comments}
+              hasMore={false}
+              loadMore={() => {}}
+              onDelete={action('delete')}
+            />
+          </Card>
         </div>
       );
     },

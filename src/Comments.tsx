@@ -11,21 +11,22 @@ import {
 import { CommentsForm } from './CommentsForm';
 import { CommentsList } from './CommentsList';
 import { ResourceCard } from 'webpanel-antd';
+import { ResourceID } from 'webpanel-data';
 
 export interface ICommentsProps {
   dataSource: DataSource;
-  referenceID: string | number;
-  initialValues: { [key: string]: any };
+  reference: string;
+  referenceID: ResourceID;
   inputPosition?: 'top' | 'bottom';
 }
 
 export class Comments extends React.Component<ICommentsProps> {
   public render() {
-    const { dataSource } = this.props;
+    const { dataSource, reference, referenceID } = this.props;
     return (
       <ResourceCollectionLayer
         name="comments"
-        key={`job_comments_${this.props.referenceID}`}
+        key={`job_comments_${reference}_${referenceID}`}
         fields={[
           'id',
           'text',
@@ -33,7 +34,7 @@ export class Comments extends React.Component<ICommentsProps> {
           'createdByUser { family_name given_name }',
           'createdAt'
         ]}
-        initialFilters={{ job: { id: this.props.referenceID } }}
+        initialFilters={{ reference, referenceID }}
         initialSorting={[
           { columnKey: 'createdAt', order: SortInfoOrder.descend }
         ]}
@@ -79,13 +80,13 @@ export class Comments extends React.Component<ICommentsProps> {
   }
 
   private commentsForm(comments: ResourceCollection) {
-    const { initialValues, dataSource } = this.props;
+    const { dataSource, reference, referenceID } = this.props;
     return (
       <ResourceLayer
         name="Comment"
         dataSource={dataSource}
         fields={['text']}
-        initialValues={initialValues}
+        initialValues={{ reference, referenceID }}
         render={resource => (
           <CommentsForm
             resource={resource}

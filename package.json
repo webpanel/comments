@@ -45,6 +45,6 @@
     "typescript": "^3.5.3",
     "webpanel-antd": "0.0.33",
     "webpanel-auth": "0.0.25",
-    "webpanel-data": "git+https://github.com/webpanel/data.git#develop"
+    "webpanel-data": "0.0.47"
   }
 }

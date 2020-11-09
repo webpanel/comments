@@ -22,6 +22,7 @@
     "url": "https://github.com/webpanel/comments.git"
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.2.2",
     "@babel/core": "^7.6.0",
     "@storybook/addon-actions": "^5.1.11",
     "@storybook/addon-knobs": "^5.1.11",
@@ -29,11 +30,12 @@
     "@storybook/addons": "^5.1.11",
     "@storybook/react": "^5.1.11",
     "@types/graphql": "^14.2.3",
-    "@types/react": "^16.8.24",
-    "@types/react-dom": "^16.8.5",
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
     "@types/react-infinite-scroller": "^1.2.1",
+    "@types/react-router-dom": "^5.1.6",
     "ant-design-pro": "^2.2.1",
-    "antd": "^3.20.7",
+    "antd": "^4.7.3",
     "apollo-client": "^2.6.4",
     "babel-loader": "^8.0.6",
     "graphql": "^14.4.2",
@@ -42,9 +44,9 @@
     "mobx-react": "^6.1.3",
     "react-apollo": "^3.0.1",
     "react-infinite-scroller": "^1.2.4",
-    "typescript": "^3.5.3",
-    "webpanel-antd": "0.0.33",
-    "webpanel-auth": "0.0.25",
-    "webpanel-data": "0.0.47"
+    "typescript": "^3.7.2",
+    "webpanel-antd": "^0.2.1",
+    "webpanel-auth": "^0.1.10",
+    "webpanel-data": "^0.2.7"
   }
 }

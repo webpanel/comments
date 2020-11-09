@@ -1,8 +1,11 @@
-import { Button, Icon, Popconfirm } from 'antd';
-import * as React from 'react';
+import * as React from "react";
+
+import { Button, Popconfirm } from "antd";
+
+import { DeleteOutlined } from "@ant-design/icons";
 
 export interface IDeleteButtonProps {
-  onDelete: (() => void);
+  onDelete: () => void;
 }
 
 export class DeleteButton extends React.Component<IDeleteButtonProps> {
@@ -14,8 +17,8 @@ export class DeleteButton extends React.Component<IDeleteButtonProps> {
         okText="Yes"
         onConfirm={() => this.props.onDelete()}
       >
-        <Button type="danger" size="small">
-          <Icon type="delete" />
+        <Button danger={true} size="small">
+          <DeleteOutlined />
         </Button>
       </Popconfirm>
     );

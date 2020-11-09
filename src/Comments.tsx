@@ -1,23 +1,23 @@
-import * as React from 'react';
+import * as React from "react";
 
 import {
   DataSource,
   ResourceCollection,
   ResourceCollectionLayer,
   ResourceLayer,
-  SortInfoOrder
-} from 'webpanel-data';
+  SortInfoOrder,
+} from "webpanel-data";
 
-import { CommentsForm } from './CommentsForm';
-import { CommentsList } from './CommentsList';
-import { ResourceCard } from 'webpanel-antd';
-import { ResourceID } from 'webpanel-data';
+import { CommentsForm } from "./CommentsForm";
+import { CommentsList } from "./CommentsList";
+import { ResourceCard } from "webpanel-antd";
+import { ResourceID } from "webpanel-data";
 
 export interface ICommentsProps {
   dataSource: DataSource;
   reference: string;
   referenceID: ResourceID;
-  inputPosition?: 'top' | 'bottom';
+  inputPosition?: "top" | "bottom";
 }
 
 export class Comments extends React.Component<ICommentsProps> {
@@ -28,29 +28,29 @@ export class Comments extends React.Component<ICommentsProps> {
         name="comments"
         key={`job_comments_${reference}_${referenceID}`}
         fields={[
-          'id',
-          'text',
-          'createdBy',
-          'createdByUser { family_name given_name }',
-          'createdAt'
+          "id",
+          "text",
+          "createdBy",
+          "createdByUser { family_name given_name }",
+          "createdAt",
         ]}
         initialFilters={{ reference, referenceID }}
         initialSorting={[
-          { columnKey: 'createdAt', order: SortInfoOrder.descend }
+          { columnKey: "createdAt", order: SortInfoOrder.descend },
         ]}
         initialLimit={10}
         initialOffset={0}
         dataSource={dataSource}
-        render={(comments: ResourceCollection) => (
+        render={(comments: ResourceCollection<any>) => (
           <ResourceCard observedResource={comments} title="Komentáře">
-            {this.props.inputPosition === 'top' && (
-              <div style={{ marginBottom: '10px' }}>
+            {this.props.inputPosition === "top" && (
+              <div style={{ marginBottom: "10px" }}>
                 {this.commentsForm(comments)}
               </div>
             )}
             <div
               style={{
-                maxHeight: '512px'
+                maxHeight: "512px",
               }}
             >
               <CommentsList
@@ -64,14 +64,14 @@ export class Comments extends React.Component<ICommentsProps> {
                   comments.count !== undefined &&
                   comments.count > comments.limit
                 }
-                onDelete={async item => {
+                onDelete={async (item) => {
                   await comments.delete(item.id);
                   await comments.get();
                 }}
               />
             </div>
             {(this.props.inputPosition === undefined ||
-              this.props.inputPosition === 'bottom') &&
+              this.props.inputPosition === "bottom") &&
               this.commentsForm(comments)}
           </ResourceCard>
         )}
@@ -79,15 +79,15 @@ export class Comments extends React.Component<ICommentsProps> {
     );
   }
 
-  private commentsForm(comments: ResourceCollection) {
+  private commentsForm(comments: ResourceCollection<any>) {
     const { dataSource, reference, referenceID } = this.props;
     return (
       <ResourceLayer
         name="Comment"
         dataSource={dataSource}
-        fields={['text']}
+        fields={["text"]}
         initialValues={{ reference, referenceID }}
-        render={resource => (
+        render={(resource) => (
           <CommentsForm
             resource={resource}
             onMessageSent={() => comments.reload()}

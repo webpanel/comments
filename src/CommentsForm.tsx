@@ -18,7 +18,6 @@ export class CommentsForm extends React.Component<ICommentsFormProps> {
         <AInput.Group className="display-flex">
           <FormItem
             className="full-width"
-            label="text"
             name="text"
             rules={[{ required: true }]}
             style={{ marginBottom: 0 }}

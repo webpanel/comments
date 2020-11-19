@@ -19,6 +19,7 @@ export class CommentsForm extends React.Component<ICommentsFormProps> {
           <FormItem
             className="full-width"
             label="text"
+            name="text"
             rules={[{ required: true }]}
             style={{ marginBottom: 0 }}
           >

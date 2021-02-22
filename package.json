@@ -12,7 +12,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "antd": "*",
+    "antd": "^4.7.3",
     "webpanel-antd": "*",
     "webpanel-auth": "*",
     "react-infinite-scroller": "*"

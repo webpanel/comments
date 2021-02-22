@@ -1,9 +1,9 @@
-import * as InfiniteScroll from 'react-infinite-scroller';
-import * as React from 'react';
-import * as moment from 'moment';
+import * as InfiniteScroll from "react-infinite-scroller";
+import * as React from "react";
+import * as moment from "moment";
 
-import { DeleteButton } from './delete-button';
-import { List } from 'antd';
+import { DeleteButton } from "./delete-button";
+import { List } from "antd";
 
 export interface ICommentListItem {
   id: string;
@@ -26,8 +26,8 @@ export class CommentsList extends React.Component<ICommentsListProps> {
     return (
       <div
         style={{
-          overflow: 'scroll',
-          maxHeight: '512px'
+          overflow: "scroll",
+          maxHeight: "512px",
         }}
       >
         <InfiniteScroll
@@ -40,27 +40,29 @@ export class CommentsList extends React.Component<ICommentsListProps> {
             size="small"
             itemLayout="horizontal"
             dataSource={items}
-            renderItem={item => (
+            renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
                   title={
                     <div>
                       {item.createdByUser
                         ? `${item.createdByUser.given_name} ${item.createdByUser.family_name}`
-                        : 'Unknown'}{' '}
+                        : "Unknown"}{" "}
                       {item.createdAt
                         ? `(${moment(item.createdAt).calendar()})`
-                        : ''}
+                        : ""}
                     </div>
                   }
                   description={
                     <div
                       style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
+                        display: "flex",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <div style={{ margin: 'auto 0' }}>{item.text}</div>
+                      <div style={{ margin: "auto 0", whiteSpace: "pre-wrap" }}>
+                        {item.text}
+                      </div>
                       <DeleteButton onDelete={() => onDelete(item)} />
                     </div>
                   }

@@ -12,12 +12,14 @@ import { CommentsForm } from "./CommentsForm";
 import { CommentsList } from "./CommentsList";
 import { ResourceCard } from "webpanel-antd";
 import { ResourceID } from "webpanel-data";
+import { TextAreaProps } from "antd/lib/input";
 
 export interface ICommentsProps {
   dataSource: DataSource;
   reference: string;
   referenceID: ResourceID;
   inputPosition?: "top" | "bottom";
+  textareaProps?: TextAreaProps;
 }
 
 export class Comments extends React.Component<ICommentsProps> {
@@ -80,7 +82,7 @@ export class Comments extends React.Component<ICommentsProps> {
   }
 
   private commentsForm(comments: ResourceCollection<any>) {
-    const { dataSource, reference, referenceID } = this.props;
+    const { dataSource, reference, referenceID, textareaProps } = this.props;
     return (
       <ResourceLayer
         name="Comment"
@@ -91,6 +93,7 @@ export class Comments extends React.Component<ICommentsProps> {
           <CommentsForm
             resource={resource}
             onMessageSent={() => comments.reload()}
+            textareaProps={textareaProps}
           />
         )}
       />

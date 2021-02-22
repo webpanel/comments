@@ -4,13 +4,15 @@ import { Form, Input, message } from "antd";
 
 import FormItem from "antd/lib/form/FormItem";
 import { Resource } from "webpanel-data";
+import { TextAreaProps } from "antd/lib/input";
 
 export interface ICommentsFormProps {
   resource: Resource;
   onMessageSent?: () => void;
+  textareaProps?: TextAreaProps;
 }
 export const CommentsForm = (props: ICommentsFormProps) => {
-  const { resource, onMessageSent } = props;
+  const { resource, onMessageSent, textareaProps } = props;
   const [form] = Form.useForm();
 
   const onSuccess = async (values: any) => {
@@ -35,8 +37,9 @@ export const CommentsForm = (props: ICommentsFormProps) => {
         style={{ marginBottom: 0 }}
       >
         <Input.TextArea
-          autoSize={{ minRows: 1, maxRows: 3 }}
+          autoSize={{ minRows: 1, maxRows: 4 }}
           placeholder="Comment's text"
+          {...textareaProps}
           disabled={resource.loading}
           onPressEnter={(e) => {
             if (!e.shiftKey) {

@@ -10,12 +10,11 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "dependencies": {},
   "peerDependencies": {
     "antd": "^4.7.3",
+    "react-infinite-scroller": "*",
     "webpanel-antd": "*",
-    "webpanel-auth": "*",
-    "react-infinite-scroller": "*"
+    "webpanel-auth": "*"
   },
   "repository": {
     "type": "git",
@@ -47,6 +46,6 @@
     "typescript": "^3.7.2",
     "webpanel-antd": "^0.2.1",
     "webpanel-auth": "^0.1.10",
-    "webpanel-data": "^0.2.7"
+    "webpanel-data": "github:webpanel/data"
   }
 }

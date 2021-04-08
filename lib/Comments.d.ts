@@ -1,4 +1,4 @@
-import * as React from "react";
+/// <reference types="react" />
 import { DataSource } from "webpanel-data";
 import { ResourceID } from "webpanel-data";
 import { TextAreaProps } from "antd/lib/input";
@@ -9,7 +9,4 @@ export interface ICommentsProps {
     inputPosition?: "top" | "bottom";
     textareaProps?: TextAreaProps;
 }
-export declare class Comments extends React.Component<ICommentsProps> {
-    render(): JSX.Element;
-    private commentsForm;
-}
+export declare const Comments: (props: ICommentsProps) => JSX.Element;

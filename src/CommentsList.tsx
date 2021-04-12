@@ -49,7 +49,9 @@ export class CommentsList extends React.Component<ICommentsListProps> {
                         ? `${item.createdByUser.given_name} ${item.createdByUser.family_name}`
                         : "Unknown"}{" "}
                       {item.createdAt
-                        ? `(${moment(item.createdAt).calendar()})`
+                        ? `(${moment(item.createdAt).format("l")} ${moment(
+                            item.createdAt
+                          ).format("LT")})`
                         : ""}
                     </div>
                   }

@@ -15,16 +15,22 @@ export const CommentsForm = (props: ICommentsFormProps) => {
   const { resource, onMessageSent, textareaProps } = props;
   const [form] = Form.useForm();
 
+  const res = new Resource({
+    name: resource.name,
+    dataSource: resource.dataSource,
+    fields: ["text"],
+    initialValues: resource.data,
+  });
   const onSuccess = async (values: any) => {
     try {
-      await resource.save(values);
+      await res.save(values);
       message.success("Vaše zpráva byla úspěšně odeslána");
       if (onMessageSent) {
         onMessageSent();
       }
       form.resetFields();
     } catch (err) {
-      message.success("Během odesílání došlo k chybě");
+      message.error("Během odesílání došlo k chybě");
     }
   };
 

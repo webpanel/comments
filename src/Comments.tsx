@@ -20,6 +20,7 @@ export interface ICommentsProps {
   referenceID: ResourceID;
   inputPosition?: "top" | "bottom";
   textareaProps?: TextAreaProps;
+  canDelete?: (item: any) => boolean;
 }
 
 const CommentsFormInstance = (
@@ -42,7 +43,7 @@ const CommentsFormInstance = (
 };
 
 export const Comments = (props: ICommentsProps) => {
-  const { dataSource, reference, referenceID } = props;
+  const { dataSource, reference, referenceID, canDelete } = props;
   const comments = useResourceCollection({
     name: "comments",
     fields: [
@@ -79,6 +80,7 @@ export const Comments = (props: ICommentsProps) => {
             comments.count !== undefined &&
             comments.count > comments.limit
           }
+          canDelete={canDelete}
           onDelete={async (item) => {
             await comments.delete(item.id);
             await comments.get();

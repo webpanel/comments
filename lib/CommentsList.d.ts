@@ -13,6 +13,7 @@ export interface ICommentsListProps {
     hasMore: boolean;
     loadMore: (page: number) => void;
     onDelete: (item: ICommentListItem) => void;
+    canDelete?: (item: any) => boolean;
 }
 export declare class CommentsList extends React.Component<ICommentsListProps> {
     render(): JSX.Element;

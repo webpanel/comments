@@ -8,5 +8,6 @@ export interface ICommentsProps {
     referenceID: ResourceID;
     inputPosition?: "top" | "bottom";
     textareaProps?: TextAreaProps;
+    canDelete?: (item: any) => boolean;
 }
 export declare const Comments: (props: ICommentsProps) => JSX.Element;

@@ -17,11 +17,12 @@ export interface ICommentsListProps {
   hasMore: boolean;
   loadMore: (page: number) => void;
   onDelete: (item: ICommentListItem) => void;
+  canDelete?: (item: any) => boolean;
 }
 
 export class CommentsList extends React.Component<ICommentsListProps> {
   public render() {
-    const { items, hasMore, loadMore, onDelete } = this.props;
+    const { items, hasMore, loadMore, onDelete, canDelete } = this.props;
 
     return (
       <div
@@ -65,7 +66,9 @@ export class CommentsList extends React.Component<ICommentsListProps> {
                       <div style={{ margin: "auto 0", whiteSpace: "pre-wrap" }}>
                         {item.text}
                       </div>
-                      <DeleteButton onDelete={() => onDelete(item)} />
+                      {(!canDelete || canDelete(item)) && (
+                        <DeleteButton onDelete={() => onDelete(item)} />
+                      )}
                     </div>
                   }
                 />

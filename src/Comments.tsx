@@ -13,6 +13,7 @@ import { CommentsList } from "./CommentsList";
 import { ResourceCard } from "webpanel-antd";
 import { ResourceID } from "webpanel-data";
 import { TextAreaProps } from "antd/lib/input";
+import { useTranslation } from "react-i18next";
 
 export interface ICommentsProps {
   dataSource: DataSource;
@@ -43,6 +44,7 @@ const CommentsFormInstance = (
 };
 
 export const Comments = (props: ICommentsProps) => {
+  const { t } = useTranslation("webpanel-comments");
   const { dataSource, reference, referenceID, canDelete } = props;
   const comments = useResourceCollection({
     name: "comments",
@@ -60,7 +62,7 @@ export const Comments = (props: ICommentsProps) => {
     dataSource: dataSource,
   });
   return (
-    <ResourceCard observedResource={comments} title="Komentáře">
+    <ResourceCard observedResource={comments} title={t("comments_card_title")}>
       {props.inputPosition === "top" && (
         <div style={{ marginBottom: "10px" }}>
           <CommentsFormInstance {...props} comments={comments} />

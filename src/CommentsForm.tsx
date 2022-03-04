@@ -5,6 +5,7 @@ import { Form, Input, message } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import { Resource } from "webpanel-data";
 import { TextAreaProps } from "antd/lib/input";
+import { useTranslation } from "react-i18next";
 
 export interface ICommentsFormProps {
   resource: Resource;
@@ -12,6 +13,7 @@ export interface ICommentsFormProps {
   textareaProps?: TextAreaProps;
 }
 export const CommentsForm = (props: ICommentsFormProps) => {
+  const { t } = useTranslation("webpanel-comments");
   const { resource, onMessageSent, textareaProps } = props;
   const [form] = Form.useForm();
 
@@ -24,13 +26,13 @@ export const CommentsForm = (props: ICommentsFormProps) => {
   const onSuccess = async (values: any) => {
     try {
       await res.save(values);
-      message.success("Vaše zpráva byla úspěšně odeslána");
+      message.success(t("comment_sent"));
       if (onMessageSent) {
         onMessageSent();
       }
       form.resetFields();
     } catch (err) {
-      message.error("Během odesílání došlo k chybě");
+      message.error(t("comment_sending_error"));
     }
   };
 
@@ -44,7 +46,7 @@ export const CommentsForm = (props: ICommentsFormProps) => {
       >
         <Input.TextArea
           autoSize={{ minRows: 1, maxRows: 4 }}
-          placeholder="Comment's text"
+          placeholder={t("comment_placeholder")}
           {...textareaProps}
           disabled={resource.loading}
           onPressEnter={(e) => {

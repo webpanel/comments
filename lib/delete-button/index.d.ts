@@ -1,7 +1,5 @@
-import * as React from "react";
+/// <reference types="react" />
 export interface IDeleteButtonProps {
     onDelete: () => void;
 }
-export declare class DeleteButton extends React.Component<IDeleteButtonProps> {
-    render(): JSX.Element;
-}
+export declare const DeleteButton: (props: IDeleteButtonProps) => JSX.Element;

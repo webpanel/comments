@@ -41,7 +41,7 @@ export const CommentsForm = (props: ICommentsFormProps) => {
       <FormItem
         className="full-width"
         name="text"
-        rules={[{ required: true }]}
+        rules={[{ required: true, message: t("required_field") }]}
         style={{ marginBottom: 0 }}
       >
         <Input.TextArea

@@ -9,6 +9,7 @@ export const i18nAddResourceBundles = (i18n: i18n) => {
     comment_sending_error: "There was an error when sending Your message",
     comment_placeholder: "Comment's text",
     comments_card_title: "Comments",
+    required_field: "This field is required",
   });
   i18n.addResourceBundle("cs", "webpanel-comments", {
     delete_confirm_title: "Opravdu chcete smazat tuto položku?",
@@ -18,5 +19,6 @@ export const i18nAddResourceBundles = (i18n: i18n) => {
     comment_sending_error: "Během odesílání došlo k chybě",
     comment_placeholder: "Text komentáře",
     comments_card_title: "Komentáře",
+    required_field: "Toto pole je povinné",
   });
 };

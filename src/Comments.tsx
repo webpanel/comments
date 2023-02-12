@@ -1,20 +1,15 @@
 import * as React from "react";
 
-import {
-  DataSource,
-  ResourceCollection,
-  SortInfoOrder,
-  useResource,
-  useResourceCollection,
-} from "webpanel-data";
+import { DataSource, ResourceCollection, useResource } from "webpanel-data";
 
-import { CommentsForm } from "./CommentsForm";
-import { CommentsList } from "./CommentsList";
-import { ResourceCard } from "webpanel-antd";
-import { ResourceID } from "webpanel-data";
+import { CardProps } from "antd/lib/card";
 import { TextAreaProps } from "antd/lib/input";
 import { useTranslation } from "react-i18next";
-import { CardProps } from "antd/lib/card";
+import { ResourceCard } from "webpanel-antd";
+import { ResourceID } from "webpanel-data";
+import { CommentsForm } from "./CommentsForm";
+import { CommentsList } from "./CommentsList";
+import { useCommentsResourceCollection } from "./resource-collection";
 
 export interface ICommentsProps {
   dataSource: DataSource;
@@ -24,12 +19,21 @@ export interface ICommentsProps {
   textareaProps?: TextAreaProps;
   cardProps?: CardProps;
   canDelete?: (item: any) => boolean;
+  onDeleted?: (item: any) => void;
+  onCreated?: (item: any) => void;
 }
 
 const CommentsFormInstance = (
   props: ICommentsProps & { comments: ResourceCollection<any> }
 ) => {
-  const { dataSource, reference, referenceID, textareaProps, comments } = props;
+  const {
+    dataSource,
+    reference,
+    referenceID,
+    textareaProps,
+    comments,
+    onCreated,
+  } = props;
   const resource = useResource({
     name: "Comment",
     dataSource: dataSource,
@@ -39,7 +43,12 @@ const CommentsFormInstance = (
   return (
     <CommentsForm
       resource={resource}
-      onMessageSent={() => comments.reload()}
+      onMessageSent={(item) => {
+        comments.reload();
+        if (onCreated) {
+          onCreated(item);
+        }
+      }}
       textareaProps={textareaProps}
     />
   );
@@ -47,22 +56,13 @@ const CommentsFormInstance = (
 
 export const Comments = (props: ICommentsProps) => {
   const { t } = useTranslation("webpanel-comments");
-  const { dataSource, reference, referenceID, canDelete } = props;
-  const comments = useResourceCollection({
-    name: "comments",
-    fields: [
-      "id",
-      "text",
-      "createdBy",
-      "createdByUser { family_name given_name }",
-      "createdAt",
-    ],
-    initialFilters: { reference, referenceID },
-    initialSorting: [{ columnKey: "createdAt", order: SortInfoOrder.descend }],
-    initialLimit: 10,
-    initialOffset: 0,
-    dataSource: dataSource,
+  const { dataSource, reference, referenceID, canDelete, onDeleted } = props;
+  const comments = useCommentsResourceCollection({
+    dataSource,
+    reference,
+    referenceID,
   });
+
   return (
     <ResourceCard
       title={t("comments_card_title")}
@@ -92,6 +92,9 @@ export const Comments = (props: ICommentsProps) => {
           onDelete={async (item) => {
             await comments.delete(item.id);
             await comments.get();
+            if (onDeleted) {
+              onDeleted(item);
+            }
           }}
         />
       </div>

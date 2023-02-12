@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 export interface ICommentsFormProps {
   resource: Resource;
-  onMessageSent?: () => void;
+  onMessageSent?: (item: any) => void;
   textareaProps?: TextAreaProps;
 }
 export const CommentsForm = (props: ICommentsFormProps) => {
@@ -25,10 +25,10 @@ export const CommentsForm = (props: ICommentsFormProps) => {
   });
   const onSuccess = async (values: any) => {
     try {
-      await res.save(values);
+      const item = await res.save(values);
       message.success(t("comment_sent"));
       if (onMessageSent) {
-        onMessageSent();
+        onMessageSent(item);
       }
       form.resetFields();
     } catch (err) {

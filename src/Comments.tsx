@@ -14,6 +14,7 @@ import { ResourceCard } from "webpanel-antd";
 import { ResourceID } from "webpanel-data";
 import { TextAreaProps } from "antd/lib/input";
 import { useTranslation } from "react-i18next";
+import { CardProps } from "antd/lib/card";
 
 export interface ICommentsProps {
   dataSource: DataSource;
@@ -21,6 +22,7 @@ export interface ICommentsProps {
   referenceID: ResourceID;
   inputPosition?: "top" | "bottom";
   textareaProps?: TextAreaProps;
+  cardProps?: CardProps;
   canDelete?: (item: any) => boolean;
 }
 
@@ -62,7 +64,11 @@ export const Comments = (props: ICommentsProps) => {
     dataSource: dataSource,
   });
   return (
-    <ResourceCard observedResource={comments} title={t("comments_card_title")}>
+    <ResourceCard
+      title={t("comments_card_title")}
+      {...props.cardProps}
+      observedResource={comments}
+    >
       {props.inputPosition === "top" && (
         <div style={{ marginBottom: "10px" }}>
           <CommentsFormInstance {...props} comments={comments} />
